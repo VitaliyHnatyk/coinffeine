@@ -15,9 +15,27 @@ case class BitcoinBalance(
   val amount = estimated
 }
 
+case class NubitBalance(
+  estimated: Nubit.Amount,
+  available: Nubit.Amount,
+  minOutput: Option[Nubit.Amount],
+  blocked: Nubit.Amount = Nubit.Zero,
+  hasExpired: Boolean = false) extends Balance[Nubit.type] {
+
+  val amount = estimated
+}
+
 object BitcoinBalance {
 
   def singleOutput(amount: Bitcoin.Amount) = BitcoinBalance(
+    estimated = amount,
+    available = amount,
+    minOutput = Some(amount))
+}
+
+object NubitBalance {
+
+  def singleOutput(amount: Nubit.Amount) = NubitBalance(
     estimated = amount,
     available = amount,
     minOutput = Some(amount))

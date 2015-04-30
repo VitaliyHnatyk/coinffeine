@@ -45,7 +45,7 @@ case class CurrencyAmount[C <: Currency](units: Long, currency: C)
   val isNegative = units < 0
 
   /** Convert this amount to an integer number of the minimum indivisible units. This means
-    * cents for Euro/Dollar and Satoshis for Bitcoin. */
+    * cents for Euro/Dollar and Satoshis for Bitcoin/Nubit. */
   def toIndivisibleUnits: BigInt =
     (value / CurrencyAmount.smallestAmount(currency).value).toBigInt()
 
